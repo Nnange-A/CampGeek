@@ -1,0 +1,123 @@
+
+<% layout("layouts/boilerplate") -%>
+
+
+<div class="row">
+
+    <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary mb-3 col-2 offset-5">Back to campground</a>
+
+    <h1 class="text-center">
+        Edit campground: <em><%= campground.title %></em>
+    </h1>
+
+    <div class="col-6 offset-3">
+
+        <form class="validated-form" action="/campgrounds/<%= campground._id %>?_method=PUT" method="post" novalidate enctype="multipart/form-data">
+
+            <div class="mb-3">
+        
+                <label class="form-label" for="title">Title:</label>
+                <input class="noMarginInput form-control" type="text" id="title" name="campground[title]" value="<%= campground.title %>" placeholder="Example Camp" required>
+
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+
+                <div class="invalid-feedback">
+                    Enter a title.
+                </div>
+        
+            </div>
+            
+            <div class="mb-3">
+        
+                <label class="form-label" for="location">Location:</label>
+                <input class="noMarginInput form-control" type="text" id="location" name="campground[location]" value="<%= campground.location %>" placeholder="Example, Location" required>
+
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+
+                <div class="invalid-feedback">
+                    Enter a location.
+                </div>
+        
+            </div>
+            
+            <div class="mb-3">
+        
+                <label class="form-label" for="price">Price:</label>
+        
+                <div class="input-group">
+        
+                    <span class="input-group-text" id="price-label">$</span>
+                    <input id="price"  name="campground[price]" type="text" class="noMarginInput form-control" value="<%= campground.price %>" placeholder="0.00" aria-label="Price" aria-describedby="price-label" required>
+
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+
+                    <div class="invalid-feedback">
+                        Enter a price.
+                    </div>
+        
+                </div>
+        
+            </div>
+            
+            <div class="mb-3">
+        
+                <label class="form-label" for="description">Description:</label>
+                <textarea class="form-control" name="campground[description]" id="description" rows="3" required><%= campground.description %></textarea>
+
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+
+                <div class="invalid-feedback">
+                    Enter a description.
+                </div>
+        
+            </div>
+
+            <h5>Images</h5>
+
+            <% if (campground.images.length && campground.images.length > 0) { %>
+            
+                <div class="mb-3">
+    
+                    <% campground.images.forEach((image, index) => { %>
+
+                        <div style="display: inline-block; margin-right: 2px;">
+                            <img class="img-thumbnail" src="<%= image.thumbnail %>" alt="">
+
+                            <div class="form-check">
+                                <input style="margin: 0;" type="checkbox" id="image-<%= index %>" name="deleteImages[]" value="<%= image.filename %>">
+                                <label for="image-<%= index %>">Delete</label>
+                            </div>
+                        </div>                    
+
+                    <% }); %>
+        
+                </div>
+            
+            <% } %>
+            
+            <div class="mb-3">
+        
+                <label class="form-label" for="images">Add image(s):</label>
+                <input class="noMarginInput form-control" type="file" id="images" name="images" multiple>
+        
+            </div>
+            
+            <div class="mb-5 mt-4">
+        
+                <button class="btn btn-success">Save changes</button>
+        
+            </div>
+        
+        </form>
+
+    </div>
+
+</div>

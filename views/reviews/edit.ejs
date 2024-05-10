@@ -1,0 +1,63 @@
+
+<% layout("layouts/boilerplate") -%>
+
+<link rel="stylesheet" href="/styles/starability.css">
+
+<div class="row">
+
+    <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary mb-3 col-2 offset-5">Back to campground</a>
+
+    <h1 class="text-center">
+        Edit review
+    </h1>
+
+    <div class="col-6 offset-3">
+
+        <form class="validated-form" action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=PUT" method="post" novalidate>
+
+            <div class="mb-4">
+
+                <fieldset class="starability-basic">
+                    <legend style="font-size: 1.2rem;">Rating:</legend>
+                    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." <%= review.rating === 1 ? "checked" : "" %>/>
+                    <input type="radio" id="first-rate1" name="review[rating]" value="1" <%= review.rating === 1 ? "checked" : "" %>/>
+                    <label for="first-rate1" title="Terrible">1 star</label>
+                    <input type="radio" id="first-rate2" name="review[rating]" value="2" <%= review.rating === 2 ? "checked" : "" %> />
+                    <label for="first-rate2" title="Not good">2 stars</label>
+                    <input type="radio" id="first-rate3" name="review[rating]" value="3" <%= review.rating === 3 ? "checked" : "" %> />
+                    <label for="first-rate3" title="Average">3 stars</label>
+                    <input type="radio" id="first-rate4" name="review[rating]" value="4" <%= review.rating === 4 ? "checked" : "" %> />
+                    <label for="first-rate4" title="Very good">4 stars</label>
+                    <input type="radio" id="first-rate5" name="review[rating]" value="5" <%= review.rating === 5 ? "checked" : "" %> />
+                    <label for="first-rate5" title="Amazing">5 stars</label>
+                </fieldset>
+
+            </div>
+            
+            
+            <div class="mb-3" style="border: 1px solid black; padding: 16px; border-radius: 8px;">
+
+                <label for="body" class="form-label">Description</label>
+                <textarea name="review[body]" id="body" cols="30" rows="3" class="form-control" required><%= review.body %></textarea>
+
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+
+                <div class="invalid-feedback">
+                    Explain your rating, please.
+                </div>
+
+            </div>
+                        
+            <div class="mb-5">
+        
+                <button class="btn btn-success">Save changes</button>
+        
+            </div>
+        
+        </form>
+
+    </div>
+
+</div>

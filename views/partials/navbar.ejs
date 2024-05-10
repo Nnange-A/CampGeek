@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top bg-dark" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">CampGeek</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-expand d-flex justify-content-between" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link <%= url === '/' ? 'active' : '' %>" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <%= url === '/campgrounds' ? 'active' : '' %>" href="/campgrounds">Campgrounds</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <%= url === '/campgrounds/new' ? 'active' : '' %>" href="/campgrounds/new">New campground</a>
+                </li>
+            </ul>
+            
+            <ul class="navbar-nav me-3">
+                <% if (!currentUser) { %>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link <%= url === '/login' ? 'active' : '' %>" href="/login">Login</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link <%= url === '/register' ? 'active' : '' %>" href="/register">Register</a>
+                    </li>
+
+                <% } else { %>
+
+                    <li class="nav-item d-flex">
+                        <form class="d-flex justify-content-center align-items-center" action="/logout" method="post">
+                            <button class="btn btn-danger">Logout</button>
+                        </form>
+                    </li>
+
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</nav>
