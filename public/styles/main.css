@@ -6,9 +6,9 @@ li {
     line-height: 3;
 }
 
-input, textarea {
+/* input, textarea {
     margin-top: 16px;
-}
+} */
 
 #map {
     width: 100%;

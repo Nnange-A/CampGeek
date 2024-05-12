@@ -87,7 +87,7 @@ module.exports.storeReturnTo = (req, res, next) => {
             delete req.session.returnTo;
         }
     } else {
-        req.session.returnTo = req.url;
+        req.session.returnTo = req.originalUrl;
     }
     next();
 }

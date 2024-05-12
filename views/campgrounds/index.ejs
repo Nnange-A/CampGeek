@@ -100,11 +100,11 @@
 
         <% } %>
 
-    <% } else { %>
+    <% } else if (currentUser) { %>
 
         <div class="mb-5" style="border: 1px solid black; padding: 16px; border-radius: 8px;">
 
-            <p><b><em>You haven't added any campgrounds before. There's always a first time; <a href="/campgrounds/new">create one</a>.</em></b></p>
+            <p><b><em>You haven't added any campgrounds yet. There's a first time for everything - <a href="/campgrounds/new">add a campground</a>.</em></b></p>
     
         </div>
 
@@ -115,61 +115,73 @@
         <h2 class="mb-4">Other campgrounds</h2>
     <% } %>
 
-    <% for (let campground of campgrounds) { %>
+    <% if (counter === campgrounds.length) { %>
 
-        <% if (!(currentUser && campground.author.equals(currentUser._id))) { %>
+        <div class="mb-5" style="border: 1px solid black; padding: 16px; border-radius: 8px;">
 
-            <div class="card mb-5">
+            <p><b><em>No other campgrounds available.</em></b></p>
+    
+        </div>
 
-                <div class="row">
+    <% } else { %>
 
-                    <div class="col-md-4">
+        <% for (let campground of campgrounds) { %>
 
-                        <% if (campground.images.length && campground.images.length > 0) { %>
-
-                            <img
-                            style="height: 262px; min-height: 100%; border-top-right-radius: 0; border-bottom-right-radius: 0;"
-                            src="<%= campground.images[0].url %>" alt="<%= campground.title %>"
-                            class="img-fluid card-img">
-
-                        <% } else { %>
-
-                            <div
-                            style="background-color: gray; height: 100%; display: flex; justify-content: center;
-                            align-items: center; border-top-right-radius: 0; border-bottom-right-radius: 0;"
-                            class="carousel-item active card-img">
-                                <h2 style="color: white; opacity: 0.5;">No image</h2>
-                            </div>
-
-                        <% } %>
-                        
-                    </div>
-
-                    <div class="col-md-8">
-
-                        <div class="card-body">
-
-                            <h2 class="card-title d-flex justify-content-between align-items-center">
-                                <%= campground.title %>
-                                <span class="d-inline mb-0 me-3" style="font-size: 1rem;">(Added by <%= campground.author.username %>)</span>
-                            </h2>
-                            <p class="card-text"><%= campground.description %></p>
-                            <h3 class="card-text text-secondary">$<%= campground.price %></h3>
-                            <p class="card-text">
-                                <small class="text-secondary"><%= campground.location %></small>
-                            </p>
-
-                            <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary">Explore</a>
-
+            <% if (!(currentUser && campground.author.equals(currentUser._id))) { %>
+    
+                <div class="card mb-5">
+    
+                    <div class="row">
+    
+                        <div class="col-md-4">
+    
+                            <% if (campground.images.length && campground.images.length > 0) { %>
+    
+                                <img
+                                style="height: 262px; min-height: 100%; border-top-right-radius: 0; border-bottom-right-radius: 0;"
+                                src="<%= campground.images[0].url %>" alt="<%= campground.title %>"
+                                class="img-fluid card-img">
+    
+                            <% } else { %>
+    
+                                <div
+                                style="background-color: gray; height: 100%; display: flex; justify-content: center;
+                                align-items: center; border-top-right-radius: 0; border-bottom-right-radius: 0;"
+                                class="carousel-item active card-img">
+                                    <h2 style="color: white; opacity: 0.5;">No image</h2>
+                                </div>
+    
+                            <% } %>
+                            
                         </div>
-                        
+    
+                        <div class="col-md-8">
+    
+                            <div class="card-body">
+    
+                                <h2 class="card-title d-flex justify-content-between align-items-center">
+                                    <%= campground.title %>
+                                    <span class="d-inline mb-0 me-3" style="font-size: 1rem;">(Added by user: <b><%= campground.author.username %></b>)</span>
+                                </h2>
+                                <p class="card-text"><%= campground.description %></p>
+                                <h3 class="card-text text-secondary">$<%= campground.price %></h3>
+                                <p class="card-text">
+                                    <small class="text-secondary"><%= campground.location %></small>
+                                </p>
+    
+                                <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary">Explore</a>
+    
+                            </div>
+                            
+                        </div>
+    
+    
                     </div>
-
-
+    
                 </div>
-
-            </div>
-
+    
+            <% } %>
+    
         <% } %>
 
     <% } %>
@@ -180,7 +192,7 @@
 
     <div class="mb-5" style="border: 1px solid black; padding: 16px; border-radius: 8px;">
 
-        <p><b><em>No campgrounds to display. Be the first to <a href="/campgrounds/new">create one</a>.</em></b></p>
+        <p><b><em>No campgrounds to display. Be the first to <a href="/campgrounds/new">add one</a>.</em></b></p>
 
     </div>
 
