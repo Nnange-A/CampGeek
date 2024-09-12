@@ -1,2 +1,2 @@
 ## Try it out
-Paste the following link in your browser: https://campgeek.onrender.com
+Follow the link: https://campgeek.onrender.com
